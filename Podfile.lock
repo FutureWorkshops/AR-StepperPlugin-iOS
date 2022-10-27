@@ -1,0 +1,33 @@
+PODS:
+  - MobileWorkflow (2.1.5):
+    - MobileWorkflow/Core (= 2.1.5)
+  - MobileWorkflow/Core (2.1.5)
+  - StepperPlugin (1.0.0):
+    - StepperPlugin/Core (= 1.0.0)
+  - StepperPlugin/Core (1.0.0):
+    - MobileWorkflow (~> 2.1.5)
+    - StepperView (~> 1.6.7)
+  - StepperView (1.6.7)
+
+DEPENDENCIES:
+  - MobileWorkflow (~> 2.1.5)
+  - StepperPlugin (from `StepperPlugin.podspec`)
+
+SPEC REPOS:
+  https://github.com/FutureWorkshops/MWPodspecs.git:
+    - MobileWorkflow
+  trunk:
+    - StepperView
+
+EXTERNAL SOURCES:
+  StepperPlugin:
+    :path: StepperPlugin.podspec
+
+SPEC CHECKSUMS:
+  MobileWorkflow: 28b25641879e2a75a7f5fa257633318ded930806
+  StepperPlugin: ae61d1d195e5c1812dd577d708ad79169c8b7332
+  StepperView: 9b88922ef65712410c0e95c460cd115d33cfd933
+
+PODFILE CHECKSUM: 6dc0a8e3fd0ab18743a1f42a80a501ac117fdbb0
+
+COCOAPODS: 1.11.3
