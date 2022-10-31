@@ -78,6 +78,39 @@ public class StepperStepViewController: MWStepViewController {
     
 }
 
+public struct ARStepperIconView: View {
+    public var image:Image
+    public var width:CGFloat
+    public var color:Color
+    public var strokeColor:Color
+    public var circleFillColor:Color
+    
+    public init(image:Image, width:CGFloat, color: Color = Color.black, strokeColor: Color = Colors.blue(.lightSky).rawValue, circleFillColor: Color) {
+        self.image = image
+        self.width = width
+        self.color = color
+        self.strokeColor = strokeColor
+        self.circleFillColor = circleFillColor
+    }
+    
+    /// provides the content and behavior of this view.
+    public var body: some View {
+        VStack {
+            Circle()
+                .foregroundColor(self.circleFillColor)
+                .frame(width: width, height: width)
+                .overlay(Circle()
+                    .stroke(strokeColor, lineWidth: 2)
+                    .overlay(image
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundColor(self.color)
+                        .frame(width: width/2, height: width/2)
+                        .aspectRatio(contentMode: .fit)))
+        }
+    }
+}
+
 
 struct StepperStepContentView: View {
     @EnvironmentObject var step: StepperStep
@@ -108,13 +141,24 @@ struct StepperStepContentView: View {
                 .indicators(
                     self.content.map({ step -> StepperIndicationType<AnyView> in
                         return StepperIndicationType.custom(
-                            CircledIconView(
+                            ARStepperIconView(
                                 image: Image(systemName: step.sfSymbolName),
                                 width: 40,
-                                color: primaryColor(),
-                                strokeColor: primaryColor()
+                                color: step.active ? .white : primaryColor(),
+                                strokeColor: step.active ? .white : primaryColor(),
+                                circleFillColor: step.active ? primaryColor() : .white
                             ).eraseToAnyView())
 
+                    })
+                )
+                // Not sure if this has any effect
+                .stepLifeCycles(
+                    self.content.map({ step -> StepLifeCycle in
+                        if step.active {
+                            return StepLifeCycle.pending
+                        } else {
+                            return StepLifeCycle.completed
+                        }
                     })
                 )
                 .stepIndicatorMode(StepperMode.vertical)
@@ -134,6 +178,10 @@ struct StepperStepContentView: View {
     
     private func primaryTextColor() -> Color {
         return Color(theme.primaryTextColor)
+    }
+    
+    private func inactiveColor() -> Color {
+        return Color.gray
     }
 }
 
