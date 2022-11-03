@@ -8,14 +8,6 @@ import Foundation
 import MobileWorkflowCore
 import SwiftUI
 
-public struct StepperItem: Codable, Identifiable {
-    public let id: String
-    public let sfSymbolName: String
-    public let title: String
-    public let text: String
-    public let active: Bool
-}
-
 public class RestStepperStep: ObservableStep {
 
     let url: String
