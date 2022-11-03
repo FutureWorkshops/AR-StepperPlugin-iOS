@@ -42,7 +42,6 @@
         "title": "Steps",
         "steps": [
           {
-            "active": false,
             "id": "58e4bd31-5d41-4588-b377-e4543693d9e6",
             "listItemId": "1",
             "sfSymbol": "car",

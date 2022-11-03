@@ -8,16 +8,20 @@ import Foundation
 import MobileWorkflowCore
 import SwiftUI
 
-public struct RestStepperItem: Codable, Identifiable {
+public struct StepperItem: Codable, Identifiable {
     public let id: String
-    //Other item properties
+    public let sfSymbolName: String
+    public let title: String
+    public let text: String
+    public let active: Bool
 }
 
 public class RestStepperStep: ObservableStep {
-    
 
-    public override init(identifier: String, session: Session, services: StepServices) {
-        
+    let url: String
+    
+    public init(identifier: String, session: Session, services: StepServices, url: String) {
+        self.url = url
         super.init(identifier: identifier, session: session, services: services)
     }
 
@@ -27,11 +31,15 @@ public class RestStepperStep: ObservableStep {
 }
 
 extension RestStepperStep: BuildableStep {
-
-
+    public static var mandatoryCodingPaths: [CodingKey] {
+        ["url"]
+    }
+    
     public static func build(stepInfo: StepInfo, services: StepServices) throws -> Step {
-        
-        return RestStepperStep(identifier: stepInfo.data.identifier, session: stepInfo.session, services: services)
+        guard let url = stepInfo.data.content["url"] as? String else {
+            throw ParseError.invalidStepData(cause: "Invalid url for step")
+        }
+        return RestStepperStep(identifier: stepInfo.data.identifier, session: stepInfo.session, services: services, url: url)
     }
 }
 
@@ -39,25 +47,23 @@ public class RestStepperStepViewController: MWStepViewController {
     public override var titleMode: StepViewControllerTitleMode { .largeTitle }
     var restStepperStep: RestStepperStep { self.step as! RestStepperStep }
     
-    
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.addCovering(childViewController: UIHostingController(
             rootView: RestStepperStepContentView().environmentObject(self.restStepperStep)
         ))
     }
-    
 }
-
 
 struct RestStepperStepContentView: View {
     @EnvironmentObject var step: RestStepperStep
     var navigator: Navigator { step.navigator }
-    @State var content: [RestStepperItem] = [RestStepperItem(id: "RestStepperItem")]
+    var url: String { step.url }
+    @State var content: [StepperItem] = []
 
     var body: some View {
         List(content) { item in
-            Text(item.id)
+            Text(item.text)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .onTapGesture { Task { await select(item: item) }}
         }
@@ -66,26 +72,16 @@ struct RestStepperStepContentView: View {
     }
 
     @MainActor
-    @Sendable private func select(item: RestStepperItem) async {
+    @Sendable private func select(item: StepperItem) async {
         navigator.continue(selecting: item)
     }
 
     @Sendable private func update() async {
         do {
-            content = try await step.get(path: "/cities")
+            content = try await step.get(path: self.url)
         } catch {
             print("Unable to refresh: \(error)")
         }
-    }
-}
-
-struct RestStepperStepContentViewPreviews: PreviewProvider {
-    static var previews: some View {
-        RestStepperStepContentView().environmentObject(RestStepperStep(
-            identifier: "",
-            session: Session.buildEmptySession(),
-            services: StepServices.buildEmptyServices()
-        ))
     }
 }
 

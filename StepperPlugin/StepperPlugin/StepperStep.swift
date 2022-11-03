@@ -9,14 +9,6 @@ import MobileWorkflowCore
 import SwiftUI
 import StepperView
 
-public struct StepperItem: Codable, Identifiable {
-    public let id: String
-    public let sfSymbolName: String
-    public let title: String
-    public let text: String
-    public let active: Bool
-}
-
 public class StepperStep: ObservableStep {
     var stepperItems: [StepperItem]
     public init(identifier: String, session: Session, services: StepServices, stepperItems: [StepperItem]) {
@@ -56,9 +48,7 @@ extension StepperStep: BuildableStep {
             throw ParseError.invalidStepData(cause: "Invalid sfSymbolName for step")
         }
         
-        guard let active = item["active"] as? Bool else {
-            throw ParseError.invalidStepData(cause: "Invalid active for step")
-        }
+        let active = item["active"] as? Bool ?? false
         
         return StepperItem(id: id, sfSymbolName: sfSymbolName, title: title, text: text, active: active)
     }
@@ -78,38 +68,6 @@ public class StepperStepViewController: MWStepViewController {
     
 }
 
-public struct ARStepperIconView: View {
-    public var image:Image
-    public var width:CGFloat
-    public var color:Color
-    public var strokeColor:Color
-    public var circleFillColor:Color
-    
-    public init(image:Image, width:CGFloat, color: Color = Color.black, strokeColor: Color = Colors.blue(.lightSky).rawValue, circleFillColor: Color) {
-        self.image = image
-        self.width = width
-        self.color = color
-        self.strokeColor = strokeColor
-        self.circleFillColor = circleFillColor
-    }
-    
-    /// provides the content and behavior of this view.
-    public var body: some View {
-        VStack {
-            Circle()
-                .foregroundColor(self.circleFillColor)
-                .frame(width: width, height: width)
-                .overlay(Circle()
-                    .stroke(strokeColor, lineWidth: 2)
-                    .overlay(image
-                        .resizable()
-                        .renderingMode(.template)
-                        .foregroundColor(self.color)
-                        .frame(width: width/2, height: width/2)
-                        .aspectRatio(contentMode: .fit)))
-        }
-    }
-}
 
 
 struct StepperStepContentView: View {
