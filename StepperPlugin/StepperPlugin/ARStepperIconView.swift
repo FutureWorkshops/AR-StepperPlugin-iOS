@@ -32,11 +32,12 @@ public struct ARStepperIconView: View {
                 .overlay(Circle()
                     .stroke(strokeColor, lineWidth: 2)
                     .overlay(image
-                        .resizable()
-                        .renderingMode(.template)
-                        .foregroundColor(self.color)
-                        .frame(width: width/2, height: width/2)
-                        .aspectRatio(contentMode: .fit)))
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(self.color)
+                            .aspectRatio(contentMode: .fit)
+                            .padding(10)
+                    ))
         }
     }
 }
