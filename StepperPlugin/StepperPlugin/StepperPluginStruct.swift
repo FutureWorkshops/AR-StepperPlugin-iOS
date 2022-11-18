@@ -14,8 +14,7 @@ public struct StepperPluginStruct: Plugin {
 }
 
 enum StepperStepType: String, StepType, CaseIterable {
-    case step1 = "io.app-rail.stepper.rest-stepper"
-	case step2 = "io.app-rail.stepper.stepper"
+	case step1 = "io.app-rail.stepper.stepper"
     
     var typeName: String {
         return self.rawValue
@@ -23,8 +22,7 @@ enum StepperStepType: String, StepType, CaseIterable {
     
     var stepClass: BuildableStep.Type {
         switch self {
-        case .step1: return RestStepperStep.self
-		case .step2: return StepperStep.self
+		case .step1: return StepperStep.self
         }
     }
 }
