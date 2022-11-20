@@ -12,5 +12,6 @@ public struct StepperItem: Codable, Identifiable {
     public let sfSymbolName: String
     public let title: String
     public let text: String
-    public let active: Bool
+    public let style: String
+    public var userDefaultsKey: String?
 }

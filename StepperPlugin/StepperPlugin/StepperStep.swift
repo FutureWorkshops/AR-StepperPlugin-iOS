@@ -7,7 +7,6 @@
 import Foundation
 import MobileWorkflowCore
 import SwiftUI
-import StepperView
 
 public class StepperStep: ObservableStep {
     var stepperItems: [StepperItem]
@@ -48,9 +47,10 @@ extension StepperStep: BuildableStep {
             throw ParseError.invalidStepData(cause: "Invalid sfSymbolName for step")
         }
         
-        let active = item["active"] as? Bool ?? false
-        
-        return StepperItem(id: id, sfSymbolName: sfSymbolName, title: title, text: text, active: active)
+        guard let style = item["style"] as? String else {
+            throw ParseError.invalidStepData(cause: "Invalid style for step")
+        }
+        return StepperItem(id: id, sfSymbolName: sfSymbolName, title: title, text: text, style: style)
     }
 }
 
@@ -62,85 +62,13 @@ public class StepperStepViewController: MWStepViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.addCovering(childViewController: UIHostingController(
-            rootView: StepperStepContentView(content: self.stepperStep.stepperItems).environmentObject(self.stepperStep)
+            rootView: ARStepperView(theme: stepperStep.theme).environmentObject(self.stepperStep)
         ))
     }
     
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UserDefaults.standard.set("secondary", forKey: "getMarried.style")
+    }
+    
 }
-
-
-
-struct StepperStepContentView: View {
-    @EnvironmentObject var step: StepperStep
-    var navigator: Navigator { step.navigator }
-    var theme: Theme { step.theme }
-    @State var content: [StepperItem]
-    
-    var body: some View {
-        ScrollView() {
-            StepperView()
-                .addSteps(
-                    self.content.map({ step in
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(step.title).font(.headline)
-                                Spacer()
-                                Text(step.text).font(.caption)
-                            }
-                            Spacer()
-                            Image(systemName: "chevron.right").font(.body).foregroundColor(.gray)
-                        }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            navigator.continue(selecting: step)
-                        }
-                    })
-                )
-                .indicators(
-                    self.content.map({ step -> StepperIndicationType<AnyView> in
-                        return StepperIndicationType.custom(
-                            ARStepperIconView(
-                                image: Image(systemName: step.sfSymbolName),
-                                width: 40,
-                                color: step.active ? .white : primaryColor(),
-                                strokeColor: step.active ? .white : primaryColor(),
-                                circleFillColor: step.active ? primaryColor() : .white
-                            ).eraseToAnyView())
-
-                    })
-                )
-                // Not sure if this has any effect
-                .stepLifeCycles(
-                    self.content.map({ step -> StepLifeCycle in
-                        if step.active {
-                            return StepLifeCycle.pending
-                        } else {
-                            return StepLifeCycle.completed
-                        }
-                    })
-                )
-                .stepIndicatorMode(StepperMode.vertical)
-                .spacing(50)
-                .lineOptions(StepperLineOptions.custom(2, primaryColor()))
-        }
-    }
-    
-    @MainActor
-    @Sendable private func select(item: StepperItem) async {
-        navigator.continue(selecting: item)
-    }
-    
-    private func primaryColor() -> Color {
-        return Color(theme.primaryButtonColor)
-    }
-    
-    private func primaryTextColor() -> Color {
-        return Color(theme.primaryTextColor)
-    }
-    
-    private func inactiveColor() -> Color {
-        return Color.gray
-    }
-}
-
-

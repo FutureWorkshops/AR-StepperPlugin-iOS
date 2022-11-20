@@ -46,10 +46,11 @@
             "listItemId": "1",
             "sfSymbol": "car",
             "title": "Buy Car",
-            "text": "£5,000"
+            "text": "£5,000",
+            "style": "primary"
           },
           {
-            "active": true,
+            "style": "primary",
             "id": "504e4158-9c4f-4a38-8576-32cc4c60f7bd",
             "listItemId": "2",
             "sfSymbol": "heart",
@@ -57,7 +58,7 @@
             "text": "£7,500"
           },
           {
-            "active": true,
+            "style": "primary",
             "id": "c2d35f28-a9ad-49e0-8da2-13f952f45e5c",
             "listItemId": "3",
             "sfSymbol": "person.3",
@@ -104,13 +105,110 @@
       "type": "display",
       "links": [],
       "properties": {}
-    }
+    },
+    {
+      "id": "6c3b5996-d027-4f96-833b-463fdd856622",
+      "position": {
+        "x": 287,
+        "y": 255
+      },
+      "type": "io.app-rail.stepper.user-defaults-stepper",
+      "links": [
+        {
+          "id": "1e624948-69f5-4417-a529-ff26d6e5437d",
+          "target": "d05ea705-cae0-46a4-8173-992317f16e9f",
+          "type": "push",
+          "properties": {
+            "animated": true,
+            "conditional": true,
+            "property": {
+              "itemId": null,
+              "stepId": "6c3b5996-d027-4f96-833b-463fdd856621",
+              "value": "selected.title",
+              "label": "User Defaults Stepper.selected.title"
+            },
+            "value": "Buy Car"
+          }
+        },
+        {
+          "id": "f7e03fda-4a9d-4e57-808f-5cc5e9d4dd89",
+          "target": "f7fc3efe-a307-4518-bfb2-6768ebe4bdb5",
+          "type": "push",
+          "properties": {
+            "animated": true
+          }
+        }
+      ],
+      "properties": {
+        "title": "User Defaults Stepper",
+        "steps": [
+          {
+            "style": "primary",
+            "id": "58e4bd31-5d41-4588-b377-e4543693d9e6",
+            "userDefaultsKey": "buyCar",
+            "listItemId": "1",
+            "sfSymbol": "car",
+            "title": "Buy Car",
+            "text": "£5,000"
+          },
+          {
+            "style": "outline",
+            "id": "504e4158-9c4f-4a38-8576-32cc4c60f7bd",
+            "listItemId": "2",
+            "sfSymbol": "heart",
+            "title": "Get Married",
+            "userDefaultsKey": "getMarried",
+            "text": "£7,500"
+          },
+          {
+            "style": "outline",
+            "id": "c2d35f28-a9ad-49e0-8da2-13f952f45e5c",
+            "listItemId": "3",
+            "sfSymbol": "person.3",
+            "title": "Have Family",
+            "userDefaultsKey": "haveFamily",
+            "text": "£Expensive"
+          }
+        ]
+      }
+    },
+    {
+      "id": "d05ea705-cae0-46a4-8173-992317f16e9f",
+      "position": {
+        "x": 82,
+        "y": 506
+      },
+      "type": "display",
+      "links": [],
+      "properties": {
+        "title": "Buy Car",
+        "items": [
+          {
+            "type": "text",
+            "textStyle": "left",
+            "id": "a8a47cf7-b172-46be-ada7-eb6f358b9f86",
+            "listItemId": "3",
+            "text": "{6c3b5996-d027-4f96-833b-463fdd856621.selected.title}"
+          },
+          {
+            "type": "text",
+            "textStyle": "left",
+            "id": "60b87311-fc03-4a94-b701-093ef5251564",
+            "listItemId": "2",
+            "text": "{6c3b5996-d027-4f96-833b-463fdd856621.selected.text}"
+          }
+        ]
+      }
+    },
   ],
   "navigation": {
     "style": "list",
     "list": [
       {
-        "step": "6c3b5996-d027-4f96-833b-463fdd856621"
+        "step": "6c3b5996-d027-4f96-833b-463fdd856621",
+      },
+      {
+        "step": "6c3b5996-d027-4f96-833b-463fdd856622"
       }
     ]
   },

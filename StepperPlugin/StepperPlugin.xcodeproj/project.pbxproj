@@ -14,6 +14,8 @@
 		B11F5FE8262893DE00EF2283 /* StepperPluginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11F5FE7262893DE00EF2283 /* StepperPluginTests.swift */; };
 		B11F5FEA262893DE00EF2283 /* StepperPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = B11F5FDC262893DE00EF2283 /* StepperPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B11F601526289B5A00EF2283 /* StepperPluginStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11F601426289B5A00EF2283 /* StepperPluginStruct.swift */; };
+		C9AF497C29279EF100A55081 /* ARStepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AF497B29279EF100A55081 /* ARStepperView.swift */; };
+		C9AF497E29279FCD00A55081 /* UserDefaultsStepperStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AF497D29279FCD00A55081 /* UserDefaultsStepperStep.swift */; };
 		C9EB23E12913DD4500FFF05B /* ARStepperIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EB23E02913DD4500FFF05B /* ARStepperIconView.swift */; };
 		C9EB23E22913DD4500FFF05B /* ARStepperIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EB23E02913DD4500FFF05B /* ARStepperIconView.swift */; };
 		C9EB23E42913E1BD00FFF05B /* StepperItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EB23E32913E1BD00FFF05B /* StepperItem.swift */; };
@@ -43,6 +45,8 @@
 		B11F5FE9262893DE00EF2283 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B11F601426289B5A00EF2283 /* StepperPluginStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperPluginStruct.swift; sourceTree = "<group>"; };
 		B93A8E8EC15ACB09E04222EB /* Pods_StepperPluginTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepperPluginTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9AF497B29279EF100A55081 /* ARStepperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARStepperView.swift; sourceTree = "<group>"; };
+		C9AF497D29279FCD00A55081 /* UserDefaultsStepperStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsStepperStep.swift; sourceTree = "<group>"; };
 		C9EB23E02913DD4500FFF05B /* ARStepperIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARStepperIconView.swift; sourceTree = "<group>"; };
 		C9EB23E32913E1BD00FFF05B /* StepperItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperItem.swift; sourceTree = "<group>"; };
 		D26EAA83FFE760D3D537836E /* Pods-MobileWorkflowForms-StepperPlugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileWorkflowForms-StepperPlugin.release.xcconfig"; path = "Target Support Files/Pods-MobileWorkflowForms-StepperPlugin/Pods-MobileWorkflowForms-StepperPlugin.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,9 +124,11 @@
 				B11F601426289B5A00EF2283 /* StepperPluginStruct.swift */,
 				B11F5FDC262893DE00EF2283 /* StepperPlugin.h */,
 				B11F5FDD262893DE00EF2283 /* Info.plist */,
-				6EB9363D41D772CC3E9733B5 /* StepperStep.swift */,
-				C9EB23E02913DD4500FFF05B /* ARStepperIconView.swift */,
 				C9EB23E32913E1BD00FFF05B /* StepperItem.swift */,
+				6EB9363D41D772CC3E9733B5 /* StepperStep.swift */,
+				C9AF497D29279FCD00A55081 /* UserDefaultsStepperStep.swift */,
+				C9AF497B29279EF100A55081 /* ARStepperView.swift */,
+				C9EB23E02913DD4500FFF05B /* ARStepperIconView.swift */,
 			);
 			path = StepperPlugin;
 			sourceTree = "<group>";
@@ -294,7 +300,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9AF497C29279EF100A55081 /* ARStepperView.swift in Sources */,
 				C9EB23E12913DD4500FFF05B /* ARStepperIconView.swift in Sources */,
+				C9AF497E29279FCD00A55081 /* UserDefaultsStepperStep.swift in Sources */,
 				B11F601526289B5A00EF2283 /* StepperPluginStruct.swift in Sources */,
 				C9EB23E42913E1BD00FFF05B /* StepperItem.swift in Sources */,
 				79CC49AF8A0745967FBC0BDC /* StepperStep.swift in Sources */,
