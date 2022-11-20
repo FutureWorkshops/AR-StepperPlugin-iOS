@@ -9,8 +9,31 @@ import SwiftUI
 import StepperView
 import MobileWorkflowCore
 
+class ARStepModel: ObservableObject {
+    @Published var stepperItems: [StepperItem]
+    let updateFromUserDefaults: Bool
+    
+    init(stepperItems: [StepperItem], updateFromUserDefaults: Bool = false) {
+        self.stepperItems = stepperItems
+        self.updateFromUserDefaults = updateFromUserDefaults
+    }
+    
+    public func updateStepperItemsFromUserDefaults(){
+        guard updateFromUserDefaults else { return }
+        self.stepperItems = stepperItems.map({ item in
+            guard let userDefaultsKey = item.userDefaultsKey else {
+                return item
+            }
+            
+            let style = UserDefaults.standard.string(forKey: "\(userDefaultsKey).style") ?? item.style
+            return StepperItem(id: item.id, sfSymbolName: item.sfSymbolName, title: item.title, text: item.text, style: style)
+        })
+    }
+}
+
 struct ARStepperView: View {
     @EnvironmentObject var step: ObservableStep
+    @StateObject var viewModel: ARStepModel
     var navigator: Navigator { step.navigator }
     var theme: Theme
     
@@ -18,7 +41,7 @@ struct ARStepperView: View {
         ScrollView() {
             StepperView()
                 .addSteps(
-                    self.step.stepperItems.map({ step in
+                    self.viewModel.stepperItems.map({ step in
                         HStack {
                             VStack(alignment: .leading) {
                                 Text(step.title).font(.headline)
@@ -35,7 +58,7 @@ struct ARStepperView: View {
                     })
                 )
                 .indicators(
-                    self.step.stepperItems.map({ step -> StepperIndicationType<AnyView> in
+                    self.viewModel.stepperItems.map({ step -> StepperIndicationType<AnyView> in
                         return StepperIndicationType.custom(
                             ARStepperIconView(
                                 image: Image(systemName: step.sfSymbolName),
@@ -51,9 +74,9 @@ struct ARStepperView: View {
                 .spacing(50)
                 .lineOptions(StepperLineOptions.custom(2, primaryColor()))
         }
-        .task({
-            self.step.updateStepperItemsFromUserDefaults()
-        })
+        .task {
+            self.viewModel.updateStepperItemsFromUserDefaults()
+        }
     }
     
     @MainActor

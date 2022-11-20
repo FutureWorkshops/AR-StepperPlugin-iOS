@@ -19,17 +19,6 @@ public class UserDefaultsStepperStep: ObservableStep {
     public override func instantiateViewController() -> StepViewController {
         UserDefaultsStepperStepViewController(step: self)
     }
-    
-    public func updateStepperItemsFromUserDefaults(){
-        self.stepperItems = stepperItems.map({ item in
-            guard let userDefaultsKey = item.userDefaultsKey else {
-                return item
-            }
-            
-            let style = UserDefaults.standard.string(forKey: "\(userDefaultsKey).style") ?? item.style
-            return StepperItem(id: item.id, sfSymbolName: item.sfSymbolName, title: item.title, text: item.text, style: style)
-        })
-    }
 }
 
 extension UserDefaultsStepperStep: BuildableStep {
@@ -72,23 +61,11 @@ extension UserDefaultsStepperStep: BuildableStep {
 public class UserDefaultsStepperStepViewController: MWStepViewController {
     public override var titleMode: StepViewControllerTitleMode { .largeTitle }
     var stepperStep: UserDefaultsStepperStep { self.step as! UserDefaultsStepperStep }
-    var stepperView: ARStepperView?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        self.stepperView = ARStepperView(theme: stepperStep.theme)
-        self.stepperView.environmentObject(self.stepperStep)
         self.addCovering(childViewController: UIHostingController(
-            rootView: self.stepperView
+            rootView: ARStepperView(viewModel: ARStepModel(stepperItems: self.stepperStep.stepperItems, updateFromUserDefaults: true), theme: stepperStep.theme).environmentObject(self.stepperStep)
         ))
     }
-    
-//    public override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        self.stepperStep.updateStepperItemsFromUserDefaults()
-//        if var stepperView = self.stepperView {
-//            stepperView.content = stepperStep.stepperItems
-//        }
-//    }
-    
 }

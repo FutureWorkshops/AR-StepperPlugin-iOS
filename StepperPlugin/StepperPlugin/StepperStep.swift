@@ -20,6 +20,8 @@ public class StepperStep: ObservableStep {
     }
 }
 
+
+
 extension StepperStep: BuildableStep {
     public static func build(stepInfo: StepInfo, services: StepServices) throws -> Step {
         let stepsContent = stepInfo.data.content["steps"] as? [[String: Any]] ?? []
@@ -62,7 +64,7 @@ public class StepperStepViewController: MWStepViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.addCovering(childViewController: UIHostingController(
-            rootView: ARStepperView(theme: stepperStep.theme).environmentObject(self.stepperStep)
+            rootView: ARStepperView(viewModel: ARStepModel(stepperItems: self.stepperStep.stepperItems), theme: stepperStep.theme ).environmentObject(self.stepperStep)
         ))
     }
     
