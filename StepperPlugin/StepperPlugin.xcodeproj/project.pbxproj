@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		083D54EDA70EDDD383E54706 /* Pods_StepperPluginTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B93A8E8EC15ACB09E04222EB /* Pods_StepperPluginTests.framework */; };
+		78DDD412292AC48A0051E9FB /* StepperItemConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DDD411292AC48A0051E9FB /* StepperItemConfiguration.swift */; };
 		79CC49AF8A0745967FBC0BDC /* StepperStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB9363D41D772CC3E9733B5 /* StepperStep.swift */; };
 		AEB552C9974346C75350D6B2 /* Pods_MobileWorkflow_StepperPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C728B8169C170EA031B1A57 /* Pods_MobileWorkflow_StepperPlugin.framework */; };
 		B11F5FE3262893DE00EF2283 /* StepperPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B11F5FD9262893DE00EF2283 /* StepperPlugin.framework */; };
@@ -35,6 +36,7 @@
 		0C728B8169C170EA031B1A57 /* Pods_MobileWorkflow_StepperPlugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobileWorkflow_StepperPlugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E65B496A70A5B97E9DCBAB7 /* Pods-StepperPluginTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepperPluginTests.release.xcconfig"; path = "Target Support Files/Pods-StepperPluginTests/Pods-StepperPluginTests.release.xcconfig"; sourceTree = "<group>"; };
 		6EB9363D41D772CC3E9733B5 /* StepperStep.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StepperStep.swift; sourceTree = "<group>"; };
+		78DDD411292AC48A0051E9FB /* StepperItemConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperItemConfiguration.swift; sourceTree = "<group>"; };
 		82133B9F26E81049A0A7E81F /* Pods-MobileWorkflow-StepperPlugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileWorkflow-StepperPlugin.debug.xcconfig"; path = "Target Support Files/Pods-MobileWorkflow-StepperPlugin/Pods-MobileWorkflow-StepperPlugin.debug.xcconfig"; sourceTree = "<group>"; };
 		88CF9060167E15DD2408A04F /* Pods-MobileWorkflowForms-StepperPlugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileWorkflowForms-StepperPlugin.debug.xcconfig"; path = "Target Support Files/Pods-MobileWorkflowForms-StepperPlugin/Pods-MobileWorkflowForms-StepperPlugin.debug.xcconfig"; sourceTree = "<group>"; };
 		B11F5FD9262893DE00EF2283 /* StepperPlugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StepperPlugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +131,7 @@
 				C9AF497D29279FCD00A55081 /* UserDefaultsStepperStep.swift */,
 				C9AF497B29279EF100A55081 /* ARStepperView.swift */,
 				C9EB23E02913DD4500FFF05B /* ARStepperIconView.swift */,
+				78DDD411292AC48A0051E9FB /* StepperItemConfiguration.swift */,
 			);
 			path = StepperPlugin;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				B11F601526289B5A00EF2283 /* StepperPluginStruct.swift in Sources */,
 				C9EB23E42913E1BD00FFF05B /* StepperItem.swift in Sources */,
 				79CC49AF8A0745967FBC0BDC /* StepperStep.swift in Sources */,
+				78DDD412292AC48A0051E9FB /* StepperItemConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
