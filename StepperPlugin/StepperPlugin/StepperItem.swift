@@ -9,7 +9,7 @@ import Foundation
 
 public struct StepperItem: Codable, Identifiable {
     public let id: String
-    public let sfSymbolName: String
+    public let sfSymbol: String
     public let title: String
     public let text: String
     public let style: String

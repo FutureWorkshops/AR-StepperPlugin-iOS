@@ -26,7 +26,7 @@ class ARStepModel: ObservableObject {
             }
             
             let style = UserDefaults.standard.string(forKey: "\(userDefaultsKey).style") ?? item.style
-            return StepperItem(id: item.id, sfSymbolName: item.sfSymbolName, title: item.title, text: item.text, style: style)
+            return StepperItem(id: item.id, sfSymbol: item.sfSymbol, title: item.title, text: item.text, style: style)
         })
     }
 }
@@ -61,7 +61,7 @@ struct ARStepperView: View {
                     self.viewModel.stepperItems.map({ step -> StepperIndicationType<AnyView> in
                         return StepperIndicationType.custom(
                             ARStepperIconView(
-                                image: Image(systemName: step.sfSymbolName),
+                                image: Image(systemName: step.sfSymbol),
                                 width: 40,
                                 color: step.style == "primary" ? .white : primaryColor(),
                                 strokeColor: step.style == "primary" ? .white : primaryColor(),

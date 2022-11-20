@@ -45,7 +45,7 @@ public class StepperStepViewController: MWStepViewController {
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UserDefaults.standard.set("primary", forKey: "getMarried.style")
+        UserDefaults.standard.set("secondary", forKey: "getMarried.style")
     }
     
 }
