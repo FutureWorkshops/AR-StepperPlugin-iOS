@@ -42,10 +42,4 @@ public class StepperStepViewController: MWStepViewController {
             rootView: ARStepperView(viewModel: ARStepModel(stepperItems: self.stepperStep.stepperItems), theme: stepperStep.theme ).environmentObject(self.stepperStep)
         ))
     }
-    
-    public override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UserDefaults.standard.set("secondary", forKey: "getMarried.style")
-    }
-    
 }
