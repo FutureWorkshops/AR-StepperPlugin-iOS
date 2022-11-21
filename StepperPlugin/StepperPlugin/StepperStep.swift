@@ -39,7 +39,7 @@ public class StepperStepViewController: MWStepViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.addCovering(childViewController: UIHostingController(
-            rootView: ARStepperView(viewModel: ARStepModel(stepperItems: self.stepperStep.stepperItems), theme: stepperStep.theme ).environmentObject(self.stepperStep)
+            rootView: ARStepperView(viewModel: ARStepModel(stepperItems: self.stepperStep.stepperItems), theme: stepperStep.theme ).environmentObject(stepperStep as! ObservableStep)
         ))
     }
 }
