@@ -26,7 +26,7 @@ class ARStepModel: ObservableObject {
             }
             
             let style = UserDefaults.standard.string(forKey: "\(userDefaultsKey).style") ?? item.style
-            return StepperItem(id: item.id, sfSymbol: item.sfSymbol, title: item.title, text: item.text, style: style)
+            return StepperItem(id: item.id, sfSymbol: item.sfSymbol, title: item.title, text: item.text, style: style, userDefaultsKey: item.userDefaultsKey)
         })
     }
 }
