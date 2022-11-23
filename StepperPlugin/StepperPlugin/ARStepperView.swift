@@ -31,6 +31,38 @@ class ARStepModel: ObservableObject {
     }
 }
 
+struct StepItemView: View {
+    let step: StepperItem
+    var onTap: (StepperItem) -> Void
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text(step.title).font(.headline)
+                Spacer().frame(maxHeight: 8.0)
+                Text(step.text).font(.caption)
+            }
+            Spacer()
+            Image(systemName: "chevron.right").font(.body).foregroundColor(.gray)
+        }
+        .onTapGesture { onTap(self.step) }
+    }
+}
+
+extension StepperItem {
+    var primaryStyle: Bool { style == "primary" }
+    
+    func indicatorView(primaryColor: Color) -> StepperIndicationType<ARStepperIconView> {
+        StepperIndicationType.custom(ARStepperIconView(
+            image: Image(systemName: sfSymbol),
+            width: 40,
+            color: primaryStyle ? .white : primaryColor,
+            strokeColor: primaryStyle ? .white : primaryColor,
+            circleFillColor: primaryStyle ? primaryColor : .white
+        ))
+    }
+}
+
 struct ARStepperView: View {
     @EnvironmentObject var step: ObservableStep
     @StateObject var viewModel: ARStepModel
