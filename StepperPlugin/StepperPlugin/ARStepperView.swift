@@ -45,6 +45,7 @@ struct StepItemView: View {
             Spacer()
             Image(systemName: "chevron.right").font(.body).foregroundColor(.gray)
         }
+        .contentShape(Rectangle())
         .onTapGesture { onTap(self.step) }
     }
 }
