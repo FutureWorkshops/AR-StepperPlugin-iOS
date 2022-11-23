@@ -31,6 +31,39 @@ class ARStepModel: ObservableObject {
     }
 }
 
+struct StepItemView: View {
+    let step: StepperItem
+    var onTap: (StepperItem) -> Void
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text(step.title).font(.headline)
+                Spacer().frame(maxHeight: 8.0)
+                Text(step.text).font(.caption)
+            }
+            Spacer()
+            Image(systemName: "chevron.right").font(.body).foregroundColor(.gray)
+        }
+        .contentShape(Rectangle())
+        .onTapGesture { onTap(self.step) }
+    }
+}
+
+extension StepperItem {
+    var primaryStyle: Bool { style == "primary" }
+    
+    func indicatorView(primaryColor: Color) -> StepperIndicationType<ARStepperIconView> {
+        StepperIndicationType.custom(ARStepperIconView(
+            image: Image(systemName: sfSymbol),
+            width: 40,
+            color: primaryStyle ? .white : primaryColor,
+            strokeColor: primaryStyle ? .white : primaryColor,
+            circleFillColor: primaryStyle ? primaryColor : .white
+        ))
+    }
+}
+
 struct ARStepperView: View {
     @EnvironmentObject var step: ObservableStep
     @StateObject var viewModel: ARStepModel
@@ -40,36 +73,12 @@ struct ARStepperView: View {
     var body: some View {
         ScrollView() {
             StepperView()
-                .addSteps(
-                    self.viewModel.stepperItems.map({ step in
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(step.title).font(.headline)
-                                Spacer()
-                                Text(step.text).font(.caption)
-                            }
-                            Spacer()
-                            Image(systemName: "chevron.right").font(.body).foregroundColor(.gray)
-                        }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            navigator.continue(selecting: step)
-                        }
-                    })
-                )
-                .indicators(
-                    self.viewModel.stepperItems.map({ step -> StepperIndicationType<AnyView> in
-                        return StepperIndicationType.custom(
-                            ARStepperIconView(
-                                image: Image(systemName: step.sfSymbol),
-                                width: 40,
-                                color: step.style == "primary" ? .white : primaryColor(),
-                                strokeColor: step.style == "primary" ? .white : primaryColor(),
-                                circleFillColor: step.style == "primary" ? primaryColor() : .white
-                            ).eraseToAnyView())
-
-                    })
-                )
+                .addSteps(viewModel.stepperItems.map({ step in
+                    StepItemView(step: step, onTap: navigator.continue(selecting:))
+                }))
+                .indicators(viewModel.stepperItems.map({ step in
+                    step.indicatorView(primaryColor: primaryColor())
+                }))
                 .stepIndicatorMode(StepperMode.vertical)
                 .spacing(50)
                 .lineOptions(StepperLineOptions.custom(2, primaryColor()))
