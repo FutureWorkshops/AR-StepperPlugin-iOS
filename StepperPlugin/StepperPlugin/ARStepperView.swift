@@ -72,36 +72,12 @@ struct ARStepperView: View {
     var body: some View {
         ScrollView() {
             StepperView()
-                .addSteps(
-                    self.viewModel.stepperItems.map({ step in
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(step.title).font(.headline)
-                                Spacer()
-                                Text(step.text).font(.caption)
-                            }
-                            Spacer()
-                            Image(systemName: "chevron.right").font(.body).foregroundColor(.gray)
-                        }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            navigator.continue(selecting: step)
-                        }
-                    })
-                )
-                .indicators(
-                    self.viewModel.stepperItems.map({ step -> StepperIndicationType<AnyView> in
-                        return StepperIndicationType.custom(
-                            ARStepperIconView(
-                                image: Image(systemName: step.sfSymbol),
-                                width: 40,
-                                color: step.style == "primary" ? .white : primaryColor(),
-                                strokeColor: step.style == "primary" ? .white : primaryColor(),
-                                circleFillColor: step.style == "primary" ? primaryColor() : .white
-                            ).eraseToAnyView())
-
-                    })
-                )
+                .addSteps(viewModel.stepperItems.map({ step in
+                    StepItemView(step: step, onTap: navigator.continue(selecting:))
+                }))
+                .indicators(viewModel.stepperItems.map({ step in
+                    step.indicatorView(primaryColor: primaryColor())
+                }))
                 .stepIndicatorMode(StepperMode.vertical)
                 .spacing(50)
                 .lineOptions(StepperLineOptions.custom(2, primaryColor()))
