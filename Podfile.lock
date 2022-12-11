@@ -2,9 +2,9 @@ PODS:
   - MobileWorkflow (2.1.5):
     - MobileWorkflow/Core (= 2.1.5)
   - MobileWorkflow/Core (2.1.5)
-  - StepperPlugin (1.0.1):
-    - StepperPlugin/Core (= 1.0.1)
-  - StepperPlugin/Core (1.0.1):
+  - StepperPlugin (1.1.1):
+    - StepperPlugin/Core (= 1.1.1)
+  - StepperPlugin/Core (1.1.1):
     - MobileWorkflow (~> 2.1.5)
     - StepperView (~> 1.6.7)
   - StepperView (1.6.7)
@@ -25,7 +25,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   MobileWorkflow: 28b25641879e2a75a7f5fa257633318ded930806
-  StepperPlugin: e157234937be911af828ea303361294a28e93891
+  StepperPlugin: 660e9589eb2c1b95e00f51755959c4a1e9dea50f
   StepperView: 9b88922ef65712410c0e95c460cd115d33cfd933
 
 PODFILE CHECKSUM: 6dc0a8e3fd0ab18743a1f42a80a501ac117fdbb0
